@@ -77,42 +77,54 @@ const Index = () => {
       <Hero />
 
       {/* Scrolling Banner Section */}
-<section className="bg-gradient-to-r from-primary via-primary/90 to-primary overflow-hidden">
-  {/* responsive heights: small / md / lg */}
-  <div className="relative w-full flex items-center h-[100px] md:h-[200px] lg:h-[140px] overflow-hidden">
-    <motion.div
-      className="flex gap-20 items-center whitespace-nowrap"
-      animate={{ x: [0, -2000] }}
-      transition={{
-        duration: 25,
-        repeat: Infinity,
-        ease: 'linear',
-      }}
-    >
-      {[0, 1, 2, 3, 4, 5].map((index) => (
-        <div
-          key={index}
-          className="flex gap-6 items-center flex-shrink-0 min-w-max"
-          /* keep children vertically centered */
+<section className="bg-gradient-to-r from-primary via-primary/90 to-primary overflow-hidden w-full">
+      <div
+        className="
+          relative w-full flex items-center
+          h-[120px] sm:h-[140px] md:h-[180px] lg:h-[200px]
+          overflow-hidden
+        "
+      >
+        <motion.div
+          className="flex gap-20 items-center whitespace-nowrap"
+          animate={{ x: [0, -2000] }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
         >
-          <span
-            className="inline-block font-bethellen text-3xl md:text-5xl lg:text-6xl text-luxury leading-[0.9] align-middle"
-            style={{ transform: 'translateY(2px)' }} // nudge to avoid font-specific clipping
-          >
-            High Spirits
-          </span>
-
-          <span
-            className="inline-block text-2xl md:text-4xl lg:text-5xl text-accent/70 leading-none align-middle"
-            style={{ transform: 'translateY(2px)' }}
-          >
-            ✦
-          </span>
-        </div>
-      ))}
-    </motion.div>
-  </div>
-</section>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <div
+              key={index}
+              className="flex gap-6 items-center flex-shrink-0 min-w-max"
+            >
+              {/* MAIN TEXT */}
+              <span
+                className="
+                  inline-block font-playfair font-bold
+                  text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+                  text-luxury leading-[1.05]
+                "
+              >
+                High Spirits
+              </span>
+ 
+              {/* STAR ICON */}
+              <span
+                className="
+                  inline-block
+                  text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                  text-accent/70 leading-[1]
+                "
+              >
+                ✦
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
 
 
 
