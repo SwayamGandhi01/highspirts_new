@@ -1,24 +1,59 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 import image1 from '@/assets/1.png';
 import image2 from '@/assets/2.png';
 import image3 from '@/assets/3.png';
 import image4 from '@/assets/4.png';
 import image5 from '@/assets/5.png';
+import heroDish1 from '@/assets/hero-dish-1.jpg';
+import heroDish2 from '@/assets/hero-dish-2.jpg';
+import heroDish3 from '@/assets/hero-dish-3.jpg';
+import dalMakhani from '@/assets/dish-dal-makhani.jpg';
+import palakPaneer from '@/assets/dish-palak-paneer.jpg';
+import roganJosh from '@/assets/dish-rogan-josh.jpg';
+import cocktail from '@/assets/cocktail-signature.jpg';
+import winePairing from '@/assets/wine-pairing.jpg';
+import restaurantAmbience from '@/assets/restaurant-ambience.jpg';
+import Image2 from '@/assets/Image2.jpg';
+import Image3 from '@/assets/Image3.jpg';
+import Image4 from '@/assets/Image4.jpg';
 
 const Gallery = () => {
-  const images = [
-    { src: image1 },
-    { src: image2 },
-    { src: image3 },
-    { src: image4 },
-    { src: image5 },
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const galleryImages = [
+    // Dine Gallery
+    { src: image1, alt: 'Restaurant 1', category: 'dine' },
+    { src: restaurantAmbience, alt: 'Restaurant Ambience', category: 'dine' },
+    { src: image2, alt: 'Restaurant 2', category: 'dine' },
+    { src: Image2, alt: 'Restaurant Detail', category: 'dine' },
+    { src: Image3, alt: 'Restaurant View', category: 'dine' },
+    { src: image4, alt: 'Restaurant 4', category: 'dine' },
+    
+    // Food Gallery
+    { src: heroDish1, alt: 'Signature Dish', category: 'food' },
+    { src: dalMakhani, alt: 'Dal Makhani', category: 'food' },
+    { src: heroDish2, alt: 'Tandoori Grill', category: 'food' },
+    { src: palakPaneer, alt: 'Palak Paneer', category: 'food' },
+    { src: heroDish3, alt: 'Biryani', category: 'food' },
+    { src: roganJosh, alt: 'Rogan Josh', category: 'food' },
+    
+    // Venue Gallery
+    { src: image3, alt: 'Restaurant 3', category: 'venue' },
+    { src: cocktail, alt: 'Cocktail', category: 'venue' },
+    { src: winePairing, alt: 'Wine Pairing', category: 'venue' },
+    { src: image5, alt: 'Restaurant 5', category: 'venue' },
+    { src: Image4, alt: 'Restaurant Interior', category: 'venue' },
+    { src: cocktail, alt: 'Cocktail Detail', category: 'venue' },
   ];
 
-  // Duplicate images for infinite scroll effect - repeat multiple times for seamless loop
-  const duplicatedImages = [...images, ...images, ...images];
+  const filteredImages = activeFilter === 'all' 
+    ? galleryImages 
+    : galleryImages.filter(img => img.category === activeFilter);
 
   return (
     <div className="min-h-screen">
@@ -60,39 +95,113 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Image Carousel Section */}
-      <section className="py-16 bg-background overflow-hidden">
+      {/* Image Grid Gallery Section */}
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-center text-3xl md:text-4xl font-playfair font-bold text-luxury mb-12">
-            Featured Gallery
-          </h2>
-          
-          <div className="relative overflow-hidden w-full">
-            <motion.div
-              className="flex gap-6"
-              animate={{ x: -100 * images.length * 100 }}
-              transition={{
-                duration: 200,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
+          <div className="flex justify-center gap-6 mb-12 flex-wrap">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveFilter('dine')}
+              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeFilter === 'dine'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'border-2 border-accent text-accent hover:bg-accent/10'
+              }`}
             >
-              {duplicatedImages.map((image, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 w-80 h-64 rounded-xl overflow-hidden elegant-shadow hover:shadow-2xl transition-all duration-300"
-                >
-                  <img
-                    src={image.src}
-                    alt={`Gallery item ${index % images.length + 1}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
-              ))}
-            </motion.div>
+              DINE GALLERY
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveFilter('venue')}
+              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeFilter === 'venue'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'border-2 border-accent text-accent hover:bg-accent/10'
+              }`}
+            >
+              VENUE GALLERY
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveFilter('food')}
+              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                activeFilter === 'food'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'border-2 border-accent text-accent hover:bg-accent/10'
+              }`}
+            >
+              FOOD GALLERY
+            </motion.button>
           </div>
+
+          {/* Gallery Grid */}
+          <motion.div 
+            layout
+            className="grid grid-cols-3 gap-4 md:gap-6"
+          >
+            {filteredImages.map((image, index) => (
+              <motion.div
+                key={`${image.alt}-${index}`}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setSelectedImage(image.src)}
+                className="group relative overflow-hidden rounded-lg aspect-square cursor-pointer"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                {/* Overlay on hover */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center"
+                >
+                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.8 }}
+            className="relative max-w-4xl w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={selectedImage} alt="Gallery" className="w-full h-auto rounded-lg" />
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-accent text-accent-foreground rounded-full p-2 hover:bg-accent/90 transition-colors"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </motion.div>
+        </motion.div>
+      )}
 
       {/* Reservation CTA */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/20">

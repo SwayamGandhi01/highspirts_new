@@ -76,27 +76,60 @@ const Index = () => {
       <Navbar />
       <Hero />
 
-      {/* Stats Section */}
-      <section ref={statsRef} className="py-20 luxury-gradient">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center glass-effect rounded-lg p-6 hover:scale-105 transition-transform duration-300"
-              >
-                <stat.icon className="w-12 h-12 mx-auto mb-4 text-accent" />
-                <h3 className="text-4xl font-playfair font-bold text-accent mb-2">
-                  {stat.value}
-                </h3>
-                <p className="text-muted-foreground font-inter">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* Scrolling Banner Section */}
+<section className="bg-gradient-to-r from-primary via-primary/90 to-primary overflow-hidden">
+  {/* responsive heights: small / md / lg */}
+  <div className="relative w-full flex items-center h-[100px] md:h-[200px] lg:h-[140px] overflow-hidden">
+    <motion.div
+      className="flex gap-20 items-center whitespace-nowrap"
+      animate={{ x: [0, -2000] }}
+      transition={{
+        duration: 25,
+        repeat: Infinity,
+        ease: 'linear',
+      }}
+    >
+      {[0, 1, 2, 3, 4, 5].map((index) => (
+        <div
+          key={index}
+          className="flex gap-6 items-center flex-shrink-0 min-w-max"
+          /* keep children vertically centered */
+        >
+          <span
+            className="inline-block font-bethellen text-3xl md:text-5xl lg:text-6xl text-luxury leading-[0.9] align-middle"
+            style={{ transform: 'translateY(2px)' }} // nudge to avoid font-specific clipping
+          >
+            High Spirits
+          </span>
+
+          <span
+            className="inline-block text-2xl md:text-4xl lg:text-5xl text-accent/70 leading-none align-middle"
+            style={{ transform: 'translateY(2px)' }}
+          >
+            ✦
+          </span>
         </div>
+      ))}
+    </motion.div>
+  </div>
+</section>
+
+
+
+      {/* Stats Section with Banner Image */}
+      <section ref={statsRef} className="py-0 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isStatsInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8 }}
+          className="w-full h-auto"
+        >
+          <img
+            src="/banner6.jpg"
+            alt="Stats Banner"
+            className="w-full h-auto object-cover"
+          />
+        </motion.div>
       </section>
 
       <DishGrid />

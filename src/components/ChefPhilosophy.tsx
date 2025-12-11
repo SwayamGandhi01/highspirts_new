@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import chefPortrait from '@/assets/chef-portrait.jpg';
 
 const ChefPhilosophy = () => {
   const containerRef = useRef(null);
@@ -36,7 +35,7 @@ const ChefPhilosophy = () => {
             >
               <div className="relative rounded-3xl overflow-hidden elegant-shadow group">
                 <motion.img
-                  src={chefPortrait}
+                  src="/chef.png"
                   alt="Executive Chef Rajveer Singh"
                   className="w-full h-[700px] object-cover"
                   whileHover={{ scale: 1.05 }}

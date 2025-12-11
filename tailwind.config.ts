@@ -67,6 +67,7 @@ export default {
       fontFamily: {
         playfair: ['Playfair Display', 'serif'],
         inter: ['Inter', 'sans-serif'],
+        bethellen: ['Beth Ellen', 'cursive'],
       },
       keyframes: {
         "accordion-down": {
