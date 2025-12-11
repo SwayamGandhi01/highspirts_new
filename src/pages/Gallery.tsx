@@ -2,28 +2,23 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 
-import heroDish1 from '@/assets/Image.jpg';
-import heroDish2 from '@/assets/1.png';
-import heroDish3 from '@/assets/2.png';
-import dalMakhani from '@/assets/HighSpirit.png';
-import palakPaneer from '@/assets/5.png';
-import roganJosh from '@/assets/dish-rogan-josh.jpg';
-import naan from '@/assets/dish-naan.jpg';
-import restaurantAmbience from '@/assets/restaurant-ambience.jpg';
-import chefPortrait from '@/assets/chef-portrait.jpg';
+import image1 from '@/assets/1.png';
+import image2 from '@/assets/2.png';
+import image3 from '@/assets/3.png';
+import image4 from '@/assets/4.png';
+import image5 from '@/assets/5.png';
 
 const Gallery = () => {
-
   const images = [
-    { src: restaurantAmbience },
-    { src: heroDish1 },
-    { src: heroDish2 },
-    { src: heroDish3 },
-    { src: dalMakhani },
-    { src: palakPaneer },
- 
-   
+    { src: image1 },
+    { src: image2 },
+    { src: image3 },
+    { src: image4 },
+    { src: image5 },
   ];
+
+  // Duplicate images for infinite scroll effect - repeat multiple times for seamless loop
+  const duplicatedImages = [...images, ...images, ...images];
 
   return (
     <div className="min-h-screen">
@@ -65,43 +60,49 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Gallery Grid */}
+      {/* Image Carousel Section */}
+      <section className="py-16 bg-background overflow-hidden">
+        <div className="container mx-auto px-4">
+          <h2 className="text-center text-3xl md:text-4xl font-playfair font-bold text-luxury mb-12">
+            Featured Gallery
+          </h2>
+          
+          <div className="relative overflow-hidden w-full">
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: -100 * images.length * 100 }}
+              transition={{
+                duration: 200,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            >
+              {duplicatedImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 w-80 h-64 rounded-xl overflow-hidden elegant-shadow hover:shadow-2xl transition-all duration-300"
+                >
+                  <img
+                    src={image.src}
+                    alt={`Gallery item ${index % images.length + 1}`}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reservation CTA */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-4">
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            {images.map((image, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="group relative overflow-hidden rounded-xl elegant-shadow cursor-pointer aspect-square"
-              >
-                {/* Image */}
-                <img
-                  src={image.src}
-                  alt=""
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-
-                {/* Soft hover gradient (no text now) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent opacity-0 group-hover:opacity-80 transition-all duration-500" />
-              </motion.div>
-            ))}
-
-          </div>
-
-          {/* Reservation CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mt-16"
+            className="text-center"
           >
             <p className="text-muted-foreground mb-6 text-lg">
               Experience it yourself
@@ -114,7 +115,6 @@ const Gallery = () => {
               Make a Reservation
             </button>
           </motion.div>
-
         </div>
       </section>
 
