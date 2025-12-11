@@ -126,24 +126,6 @@ const Index = () => {
       </div>
     </section>
 
-
-
-      {/* Stats Section with Banner Image */}
-      <section ref={statsRef} className="py-0 overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isStatsInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
-          className="w-full h-auto"
-        >
-          <img
-            src="/banner6.jpg"
-            alt="Stats Banner"
-            className="w-full h-auto object-cover"
-          />
-        </motion.div>
-      </section>
-
       <DishGrid />
       
       {/* Signature Experiences */}
