@@ -42,7 +42,7 @@ const Footer = () => {
               Quick Links
             </h4>
            <ul className="space-y-2">
-  {['Home', 'About', 'Our Story', 'Menu', 'Gallery', 'Events'].map((link) => {
+  {['Home', 'About' , 'Menu', 'Gallery', 'Events'].map((link) => {
     const path =
       link === 'Home'
         ? '/'
@@ -82,7 +82,7 @@ const Footer = () => {
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
                 <a href="tel:0451382958" className="text-muted-foreground hover:text-accent transition-colors">
-                  0451382958
+                 +61-0451382958
                 </a>
               </li>
 
@@ -105,15 +105,15 @@ const Footer = () => {
             <ul className="space-y-2 text-muted-foreground">
               <li className="flex justify-between">
                 <span>Monday - Thursday</span>
-                <span className="text-accent font-medium">5:30PM - 11:00PM</span>
+                <span className="text-accent font-medium">11:30AM - 9:00PM</span>
               </li>
               <li className="flex justify-between">
                 <span>Friday - Saturday</span>
-                <span className="text-accent font-medium">5:30PM - 12:00AM</span>
+                <span className="text-accent font-medium">11:30AM - 9:00PM </span>
               </li>
               <li className="flex justify-between">
                 <span>Sunday</span>
-                <span className="text-accent font-medium">5:30PM - 10:30PM</span>
+                <span className="text-accent font-medium">11:30AM - 9:00PM</span>
               </li>
             </ul>
           </div>

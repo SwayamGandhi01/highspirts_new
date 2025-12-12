@@ -107,7 +107,7 @@ const Index = () => {
                   text-luxury leading-[1.05]
                 "
               >
-                High Spirits
+               “Rise in Flavour, Rise in Spirit — ਚਾਰਦੀ ਕਲਾ in Every Visit.”
               </span>
  
               {/* STAR ICON */}
@@ -118,7 +118,7 @@ const Index = () => {
                   text-accent/70 leading-[1]
                 "
               >
-                ✦
+                
               </span>
             </div>
           ))}
@@ -191,7 +191,7 @@ const Index = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
               </div>
-              <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-accent/20 rounded-full blur-3xl -z-10" />
+              {/* <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-accent/20 rounded-full blur-3xl -z-10" /> */}
             </motion.div>
 
             <motion.div
@@ -211,7 +211,7 @@ const Index = () => {
               <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
                 Each dish is a masterpiece, crafted with heritage recipes passed down through generations and elevated with contemporary presentation.
               </p>
-              <Link to="/our-story">
+              <Link to="/about">
                 <Button
                   size="lg"
                   className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold gold-glow"

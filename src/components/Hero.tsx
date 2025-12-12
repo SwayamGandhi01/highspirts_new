@@ -13,7 +13,7 @@ const Hero = () => {
       <VideoBackground />
 
       {/* Floating Food Images */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 0.3, x: 0 }}
         transition={{ duration: 1.2, delay: 0.5 }}
@@ -56,7 +56,7 @@ const Hero = () => {
           animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         />
-      </motion.div>
+      </motion.div> */}
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl">

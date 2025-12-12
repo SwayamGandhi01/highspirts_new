@@ -13,6 +13,8 @@ import roganJosh from '@/assets/dish-rogan-josh.jpg';
 import naan from '@/assets/dish-naan.jpg';
 
 const Menu = () => {
+  const [selectedDrinkCategory, setSelectedDrinkCategory] = useState('softDrinks');
+
   const menuCategories = {
     starters: [
       { name: 'Tandoori Chicken', description: 'Clay oven roasted chicken marinated in yogurt and spices', price: 24, image: heroDish2 },
@@ -62,12 +64,96 @@ const Menu = () => {
         price: 110
       },
     ],
-    wines: [
-      { name: 'Penfolds Grange (Shiraz)', description: 'South Australia - Full-bodied, rich tannins', price: 120, type: 'Red' },
-      { name: 'Henschke Hill of Grace (Shiraz)', description: 'Eden Valley - Complex, elegant, age-worthy', price: 150, type: 'Red' },
-      { name: 'Leeuwin Estate Art Series (Chardonnay)', description: 'Margaret River - Refined, creamy, oak-aged', price: 85, type: 'White' },
-      { name: 'Cloudy Bay (Sauvignon Blanc)', description: 'New Zealand - Crisp, tropical, vibrant', price: 75, type: 'White' },
-      { name: 'Dom Pérignon (Champagne)', description: 'France - Prestige cuvée, fine bubbles', price: 350, type: 'Sparkling' },
+  };
+
+  const drinksMenu = {
+    softDrinks: [
+      { name: 'Coca Cola', price: 3.50 },
+      { name: 'Sprite', price: 3.50 },
+      { name: 'Fanta Orange', price: 3.50 },
+      { name: 'Lemonade', price: 4.00 },
+      { name: 'Iced Tea', price: 4.00 },
+      { name: 'Fresh Orange Juice', price: 5.00 },
+      { name: 'Mango Lassi', price: 5.50 },
+      { name: 'Masala Chai', price: 4.00 },
+    ],
+    cocktails: [
+      { name: 'Signature Maharaja Martini', description: 'Premium vodka infused with saffron and rose petals', price: 18 },
+      { name: 'Spiced Mango Mojito', description: 'Fresh mint, mango, and Indian spices with white rum', price: 16 },
+      { name: 'Cardamom Old Fashioned', description: 'Premium whiskey with cardamom syrup and bitters', price: 20 },
+      { name: 'Pomegranate Cosmopolitan', description: 'Cranberry vodka with pomegranate juice and lime', price: 17 },
+      { name: 'Turmeric Sunrise', description: 'Tequila, turmeric syrup, orange juice, and lime', price: 16 },
+    ],
+    classicCocktails: [
+      { name: 'Lynchburg Lemonade', price: 5.95 },
+      { name: 'Classic Mojito', description: 'Blend of white rum, lemon chunks, mint leaves and soda with ice', price: 5.85 },
+      { name: 'Bloody Mary', price: 5.95 },
+      { name: 'Cosmopolitan', price: 5.95 },
+      { name: 'Manhattan', description: 'A classic combination of whiskey mixed with sweet vermouth and a splash of bitters', price: 5.95 },
+      { name: 'Whiskey Sour', price: 5.95 },
+      { name: 'Negroni', description: 'A classic combination of gin, sweet vermouth and campari', price: 5.95 },
+      { name: 'Pina Colada', description: 'A tropical blend of white rum, toasted cream and pineapple juice', price: 5.95 },
+      { name: 'Mai Tai', description: 'Perfect blend of dark rum, white rum, lime juice & pineapple juice', price: 5.95 },
+      { name: 'Old Fashioned', description: 'A blend of Bourbon, whiskey, brown sugar and angostura bitter', price: 5.95 },
+      { name: 'Muddlier', description: 'A blended smoothie of vodka, Bailey, Kahlua and vanilla ice cream', price: 5.85 },
+      { name: 'Rusty Nail', description: 'Drambuie, whisky', price: 5.95 },
+    ],
+    champagne: [
+      { name: 'Laurent Perrier La Cuvee Brut', price: 229.95 },
+      { name: 'Moet Chandon Brut', price: 126.95 },
+      { name: 'G.H. MUMM', price: 131.95 },
+      { name: 'Sala Brut', price: 39.55 },
+    ],
+    shooters: [
+      { name: 'Jager Bomb', description: 'Jagermeister shot dropped into a glass of red bull', price: 6.55 },
+      { name: 'B-52', description: 'A layered shot composed of Kahlua, Bailey and Cointreau', price: 6.55 },
+      { name: 'Hand Grenade', description: 'Blend of liqueurs dropped into a glass of red bull', price: 5.25 },
+      { name: 'Raging Bull', description: 'Vodka, blue raspberry, red bull', price: 5.25 },
+      { name: 'Kamikaze', description: 'Finest part of vodka, triple sec and lime juice', price: 4.85 },
+    ],
+    sangria: [
+      { name: 'Red', description: 'A traditional drink consists of red wine, vodka, triple sec and chopped fruits', price: 7.35, type: 'Glass 150 ML', price2: 34.75, type2: 'Pitcher (750ML)' },
+      { name: 'White', description: 'A traditional drink consists of white wine, vodka, triple sec and chopped fruits', price: 7.35, type: 'Glass 150 ML', price2: 34.75, type2: 'Pitcher (750ML)' },
+    ],
+    liqueur: [
+      { name: 'Drambuie', price: 5.95 },
+      { name: 'Jägermeister', price: 5.75 },
+      { name: 'Bailey\'s Irish Cream', price: 4.85 },
+      { name: 'Absinthe', price: 4.65 },
+      { name: 'Kahlua', price: 4.65 },
+      { name: 'Sambuca', price: 4.85 },
+      { name: 'Triple Sec', price: 4.65 },
+      { name: 'Cointreau', price: 4.65 },
+    ],
+    vodka: [
+      { name: 'Grey Goose', single: 5.25, double: 5.775, btl: 11335 },
+      { name: 'Belvedere', single: 5.25, double: 5.775, btl: 11355 },
+      { name: 'Ciroc', single: 5.25, double: 5.775, btl: 11385 },
+      { name: 'Ketel One', single: 4.95, double: 5.445, btl: 10735 },
+      { name: 'Absolut Blue', single: 3.85, double: 4.235, btl: 8275 },
+      { name: 'Smirnoff', single: 3.25, double: 3.575, btl: 6955 },
+      { name: 'M.M Verve', single: 3.25, double: 3.575, btl: 6955 },
+    ],
+    gin: [
+      { name: 'Jaisalmer', single: 5.25, double: 5.775, btl: 11385 },
+      { name: 'Hendricks', single: 5.25, double: 5.775, btl: 11355 },
+      { name: 'Roku Japanese Craft Gin', single: 5.25, double: 5.775, btl: 11355 },
+      { name: 'Old Tom Gin', single: 5.25, double: 5.775, btl: 11355 },
+      { name: 'Bombay Sapphire', single: 4.15, double: 4.565, btl: 8935 },
+      { name: 'Tanqueray', single: 4.15, double: 4.565, btl: 8935 },
+      { name: 'Short Story Gin', single: 3.95, double: 4.345, btl: 8495 },
+      { name: 'Beefeater', single: 3.95, double: 4.345, btl: 8495 },
+      { name: 'Gordons', single: 3.65, double: 4.015, btl: 7835 },
+      { name: 'Tanqueray Malacca', single: 4.25, double: 4.675, btl: 9155 },
+      { name: 'Tanqueray Rangpur', single: 4.25, double: 4.675, btl: 9155 },
+    ],
+    shots: [
+      { name: 'Patron Silver', single: 6.55, double: 7.205, btl: 14215 },
+      { name: 'Patron Reposado', single: 6.15, double: 6.765, btl: 13655 },
+      { name: 'Jose Cuervo Reposado', single: 4.75, double: 5.225, btl: 10255 },
+      { name: 'Camino Silver', single: 4.25, double: 5.005, btl: 9815 },
+      { name: 'Don Julio Blanco', single: 5.25, double: 5.775, btl: 11355 },
+      { name: 'Don Julio Reposado', single: 5.45, double: 5.995, btl: 11795 },
     ]
   };
 
@@ -106,74 +192,69 @@ const Menu = () => {
       </section>
 
       {/* Menu Section */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
-        <div className="container mx-auto px-4">
-          <Tabs defaultValue="mains" className="w-full max-w-6xl mx-auto">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6 mb-12 bg-secondary/50 p-2 rounded-lg">
-              <TabsTrigger value="starters" className="text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container mx-auto px-4 md:px-6">
+          <Tabs defaultValue="mains" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-6 mb-8 md:mb-12 bg-secondary/50 p-2 rounded-lg gap-1 md:gap-2">
+              <TabsTrigger value="starters" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
                 Starters
               </TabsTrigger>
-              <TabsTrigger value="mains" className="text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+              <TabsTrigger value="mains" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
                 Mains
               </TabsTrigger>
-              <TabsTrigger value="breads" className="text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+              <TabsTrigger value="breads" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
                 Breads
               </TabsTrigger>
-              <TabsTrigger value="desserts" className="text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+              <TabsTrigger value="desserts" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hidden md:inline-flex">
                 Desserts
               </TabsTrigger>
-              <TabsTrigger value="tasting" className="text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+              <TabsTrigger value="tasting" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground hidden lg:inline-flex">
                 Tasting Menus
               </TabsTrigger>
-              <TabsTrigger value="wines" className="text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
-                Wine List
+              <TabsTrigger value="drinks" className="text-xs sm:text-sm md:text-base data-[state=active]:bg-accent data-[state=active]:text-accent-foreground">
+                Drinks
               </TabsTrigger>
             </TabsList>
 
             {Object.entries(menuCategories).map(([category, items]) => (
-              <TabsContent key={category} value={category} className="space-y-8">
+              <TabsContent key={category} value={category} className="space-y-4 md:space-y-6 lg:space-y-8">
                 {items.map((item: { featured?: boolean; image?: string; name: string }, index: number) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className={`glass-effect rounded-lg overflow-hidden hover:scale-[1.02] transition-transform duration-300 ${
+                    className={`glass-effect rounded-lg md:rounded-xl overflow-hidden hover:scale-[1.01] md:hover:scale-[1.02] transition-transform duration-300 ${
                       item.featured ? 'border-2 border-accent gold-glow' : ''
                     }`}
                   >
-                    <div className="grid md:grid-cols-[200px_1fr] gap-6 p-6">
+                    <div className="grid grid-cols-1 md:grid-cols-[150px_1fr] lg:grid-cols-[200px_1fr] gap-4 md:gap-6 p-4 md:p-6">
                       {item.image && (
-                        <div className="relative overflow-hidden rounded-lg h-48 md:h-auto">
+                        <div className="relative overflow-hidden rounded-lg h-40 md:h-48 lg:h-auto">
                           <img
                             src={item.image}
                             alt={item.name}
                             className="w-full h-full object-cover"
                           />
                           {item.featured && (
-                            <div className="absolute top-2 right-2 bg-accent text-accent-foreground px-3 py-1 rounded-full text-xs font-semibold">
+                            <div className="absolute top-2 right-2 bg-accent text-accent-foreground px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
                               Chef's Special
                             </div>
                           )}
                         </div>
                       )}
                       <div className="flex flex-col justify-center">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h3 className="text-2xl font-playfair font-bold text-foreground">
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-2 md:mb-3 gap-2">
+                          <div className="flex-1">
+                            <h3 className="text-lg md:text-xl lg:text-2xl font-playfair font-bold text-foreground">
                               {item.name}
                             </h3>
-                            {item.type && (
-                              <span className="inline-block mt-2 px-3 py-1 bg-accent/20 text-accent text-xs font-semibold rounded-full">
-                                {item.type}
-                              </span>
-                            )}
                           </div>
-                          <span className="text-2xl font-bold text-accent ml-4">
+                          <span className="text-xl md:text-2xl font-bold text-accent flex-shrink-0">
                             ${item.price}
                           </span>
                         </div>
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
                           {item.description}
                         </p>
                       </div>
@@ -182,6 +263,132 @@ const Menu = () => {
                 ))}
               </TabsContent>
             ))}
+
+            {/* Drinks Tab */}
+            <TabsContent value="drinks" className="space-y-8 md:space-y-12">
+              {/* Category Title */}
+              <div className="text-center mb-8 md:mb-12">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-accent mb-3">Our Curated Selection</h2>
+                <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">Discover our handpicked collection of drinks, from refreshing beverages to premium spirits</p>
+              </div>
+
+              {/* Drinks Category Buttons - Enhanced */}
+              <div className="flex flex-wrap gap-2 md:gap-3 lg:gap-4 justify-center">
+                {Object.keys(drinksMenu).map((category, idx) => (
+                  <motion.button
+                    key={category}
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ delay: idx * 0.08 }}
+                    whileHover={{ scale: 1.08, y: -5 }}
+                    onClick={() => setSelectedDrinkCategory(category)}
+                    className={`px-4 md:px-7 lg:px-10 py-3 md:py-4 rounded-full font-bold transition-all duration-300 text-xs md:text-sm lg:text-base uppercase tracking-widest relative overflow-hidden group ${
+                      selectedDrinkCategory === category
+                        ? 'bg-accent text-primary gold-glow shadow-xl shadow-accent/60'
+                        : 'border-2 md:border-3 border-accent text-accent hover:bg-accent/10 backdrop-blur-sm'
+                    }`}
+                  >
+                    <span className="relative z-10">
+                      {category === 'softDrinks' && '🥤 Soft Drinks'}
+                      {category === 'cocktails' && '🍹 Cocktails'}
+                      {category === 'classicCocktails' && '🍸 Classic'}
+                      {category === 'champagne' && '🍾 Champagne'}
+                      {category === 'shooters' && '🔥 Shooters'}
+                      {category === 'sangria' && '🍷 Sangria'}
+                      {category === 'liqueur' && '🌟 Liqueur'}
+                      {category === 'vodka' && '❄️ Vodka'}
+                      {category === 'gin' && '🌿 Gin'}
+                      {category === 'shots' && '⚡ Shots'}
+                    </span>
+                    {selectedDrinkCategory !== category && (
+                      <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/20 to-accent/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    )}
+                  </motion.button>
+                ))}
+              </div>
+
+              {/* Drinks List - Premium Card Layout */}
+              <div className="space-y-4 md:space-y-5 lg:space-y-6">
+                {drinksMenu[selectedDrinkCategory as keyof typeof drinksMenu]?.map((drink: any, index: number) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.06 }}
+                    whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(212, 175, 55, 0.2)" }}
+                    className="group relative glass-effect rounded-xl md:rounded-2xl p-5 md:p-8 lg:p-10 hover:scale-[1.02] md:hover:scale-[1.03] transition-all duration-400 border-2 border-accent/40 hover:border-accent/80 backdrop-blur-lg overflow-hidden"
+                  >
+                    {/* Gradient Background Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Animated Border Glow */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-accent/50 via-transparent to-accent/50 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-500 -z-10" />
+
+                    <div className="flex flex-col gap-5 md:gap-7 relative z-10">
+                      <div className="flex-1">
+                        <div className="flex items-start justify-between mb-3 md:mb-5 gap-3">
+                          <div className="flex-1">
+                            <h3 className="text-lg md:text-2xl lg:text-3xl font-playfair font-bold text-accent group-hover:text-amber-300 transition-colors duration-300 mb-2">
+                              {drink.name}
+                            </h3>
+                            {drink.description && (
+                              <p className="text-xs md:text-sm text-muted-foreground/90 leading-relaxed group-hover:text-muted-foreground transition-colors">
+                                {drink.description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                        
+                        {/* Price Grid - Premium Design */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 pt-4 md:pt-6 border-t border-accent/20">
+                          {drink.single && (
+                            <div className="flex flex-col space-y-2">
+                              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Single</p>
+                              <p className="text-xs text-muted-foreground/70">(30 ML)</p>
+                              <p className="text-2xl md:text-3xl font-bold text-accent/90 group-hover:text-amber-300 transition-colors">${drink.single}</p>
+                            </div>
+                          )}
+                          {drink.double && (
+                            <div className="flex flex-col space-y-2">
+                              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Double</p>
+                              <p className="text-xs text-muted-foreground/70">(60 ML)</p>
+                              <p className="text-2xl md:text-3xl font-bold text-accent/90 group-hover:text-amber-300 transition-colors">${drink.double}</p>
+                            </div>
+                          )}
+                          {drink.btl && (
+                            <div className="flex flex-col space-y-2">
+                              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Bottle</p>
+                              <p className="text-xs text-muted-foreground/70">&nbsp;</p>
+                              <p className="text-2xl md:text-3xl font-bold text-accent/90 group-hover:text-amber-300 transition-colors">${drink.btl}</p>
+                            </div>
+                          )}
+                          {drink.price && !drink.single && !drink.price2 && (
+                            <div className="flex flex-col space-y-2">
+                              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Price</p>
+                              <p className="text-xs text-muted-foreground/70">&nbsp;</p>
+                              <p className="text-2xl md:text-3xl font-bold text-accent/90 group-hover:text-amber-300 transition-colors">${drink.price}</p>
+                            </div>
+                          )}
+                          {drink.type && drink.price && (
+                            <div className="flex flex-col space-y-2">
+                              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">{drink.type}</p>
+                              <p className="text-xs text-muted-foreground/70">&nbsp;</p>
+                              <p className="text-2xl md:text-3xl font-bold text-accent/90 group-hover:text-amber-300 transition-colors">${drink.price}</p>
+                            </div>
+                          )}
+                          {drink.type2 && drink.price2 && (
+                            <div className="flex flex-col space-y-2">
+                              <p className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">{drink.type2}</p>
+                              <p className="text-xs text-muted-foreground/70">&nbsp;</p>
+                              <p className="text-2xl md:text-3xl font-bold text-accent/90 group-hover:text-amber-300 transition-colors">${drink.price2}</p>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </TabsContent>
           </Tabs>
 
           <motion.div

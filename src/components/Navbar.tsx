@@ -18,8 +18,7 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Our Story', path: '/our-story' },
+    { name: 'About Us', path: '/about' },
     { name: 'Menu', path: '/menu' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Events', path: '/events' },
@@ -40,10 +39,16 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center gap-3">
+            <motion.img
+              whileHover={{ scale: 1.05 }}
+              src="/logo.png"
+              alt="High Spirits Logo"
+              className="h-16 w-auto object-contain"
+            />
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-3xl font-playfair font-bold text-luxury tracking-wider"
+              className="text-2xl lg:text-3xl font-playfair font-bold text-luxury tracking-wider hidden sm:block"
             >
               HIGH SPIRITS
             </motion.div>
