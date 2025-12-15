@@ -400,7 +400,6 @@ const allergens = {
 - Interactive calendar showing events
 - Event details modal
 - Booking integration
-- Email reminders
 
 #### Features:
 - Calendar view (monthly)
@@ -408,7 +407,6 @@ const allergens = {
 - Color-coded by event type
 - Click to see event details
 - "Book Now" button for each event
-- Email reminder signup
 
 ---
 

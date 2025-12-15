@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { BannerSkeleton } from '@/components/skeletons/BannerSkeleton';
 
 const Reservations = () => {
   const [date, setDate] = useState<Date>();
@@ -21,6 +22,7 @@ const Reservations = () => {
   const [nextBanner, setNextBanner] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isBannerLoaded, setIsBannerLoaded] = useState(false);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -33,6 +35,14 @@ const Reservations = () => {
   });
 
   const banners = ['/banner.jpg', '/banner1.jpg'];
+
+  useEffect(() => {
+    setIsBannerLoaded(false);
+    const timer = setTimeout(() => {
+      setIsBannerLoaded(true);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const displayTimer = setTimeout(() => {
@@ -144,9 +154,11 @@ const Reservations = () => {
       
       {/* Hero Section with Banner Carousel */}
       <section className="relative w-full mt-20 overflow-hidden h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh]">
+        {!isBannerLoaded && <BannerSkeleton />}
+        
         {/* Current Banner - Base Layer */}
         <div
-          className="absolute inset-0 transition-opacity duration-1500 ease-in-out"
+          className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${isBannerLoaded ? 'block' : 'hidden'}`}
           style={{
             backgroundImage: `url(${banners[currentBanner]})`,
             backgroundSize: 'cover',
@@ -154,6 +166,7 @@ const Reservations = () => {
             backgroundRepeat: 'no-repeat',
             opacity: isTransitioning ? 0 : 1,
           }}
+          onLoad={() => setIsBannerLoaded(true)}
         />
         
         {/* Next Banner - Overlay Layer */}
@@ -166,6 +179,7 @@ const Reservations = () => {
             backgroundRepeat: 'no-repeat',
             opacity: isTransitioning ? 1 : 0,
           }}
+          onLoad={() => setIsBannerLoaded(true)}
         />
         
         {/* Overlay */}

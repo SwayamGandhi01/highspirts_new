@@ -1,9 +1,11 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { MenuItemSkeleton } from '@/components/skeletons/MenuItemSkeleton';
+import ShareButtons from '@/components/ShareButtons';
 import heroDish1 from '@/assets/hero-dish-1.jpg';
 import heroDish2 from '@/assets/hero-dish-2.jpg';
 import heroDish3 from '@/assets/hero-dish-3.jpg';
@@ -14,6 +16,7 @@ import naan from '@/assets/dish-naan.jpg';
 
 const Menu = () => {
   const [selectedDrinkCategory, setSelectedDrinkCategory] = useState('softDrinks');
+  const [isLoading, setIsLoading] = useState(true);
 
   const menuCategories = {
     starters: [
@@ -157,6 +160,15 @@ const Menu = () => {
     ]
   };
 
+  // Simulate menu loading
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 600);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -218,49 +230,61 @@ const Menu = () => {
 
             {Object.entries(menuCategories).map(([category, items]) => (
               <TabsContent key={category} value={category} className="space-y-4 md:space-y-6 lg:space-y-8">
-                {items.map((item: { featured?: boolean; image?: string; name: string }, index: number) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className={`glass-effect rounded-lg md:rounded-xl overflow-hidden hover:scale-[1.01] md:hover:scale-[1.02] transition-transform duration-300 ${
-                      item.featured ? 'border-2 border-accent gold-glow' : ''
-                    }`}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-[150px_1fr] lg:grid-cols-[200px_1fr] gap-4 md:gap-6 p-4 md:p-6">
-                      {item.image && (
-                        <div className="relative overflow-hidden rounded-lg h-40 md:h-48 lg:h-auto">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-full h-full object-cover"
-                          />
-                          {item.featured && (
-                            <div className="absolute top-2 right-2 bg-accent text-accent-foreground px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
-                              Chef's Special
-                            </div>
-                          )}
-                        </div>
-                      )}
-                      <div className="flex flex-col justify-center">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-2 md:mb-3 gap-2">
-                          <div className="flex-1">
-                            <h3 className="text-lg md:text-xl lg:text-2xl font-playfair font-bold text-foreground">
-                              {item.name}
-                            </h3>
+                {isLoading ? (
+                  <MenuItemSkeleton count={Math.min(items.length, 6)} />
+                ) : (
+                  items.map((item: any, index: number) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className={`glass-effect rounded-lg md:rounded-xl overflow-hidden hover:scale-[1.01] md:hover:scale-[1.02] transition-transform duration-300 ${
+                        item.featured ? 'border-2 border-accent gold-glow' : ''
+                      }`}
+                    >
+                      <div className="grid grid-cols-1 md:grid-cols-[150px_1fr] lg:grid-cols-[200px_1fr] gap-4 md:gap-6 p-4 md:p-6">
+                        {item.image && (
+                          <div className="relative overflow-hidden rounded-lg h-40 md:h-48 lg:h-auto">
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-full h-full object-cover"
+                            />
+                            {item.featured && (
+                              <div className="absolute top-2 right-2 bg-accent text-accent-foreground px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
+                                Chef's Special
+                              </div>
+                            )}
                           </div>
-                          <span className="text-xl md:text-2xl font-bold text-accent flex-shrink-0">
-                            ${item.price}
-                          </span>
+                        )}
+                        <div className="flex flex-col justify-center flex-1">
+                          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-2 md:mb-3 gap-2">
+                            <div className="flex-1">
+                              <h3 className="text-lg md:text-xl lg:text-2xl font-playfair font-bold text-foreground">
+                                {item.name}
+                              </h3>
+                            </div>
+                            <span className="text-xl md:text-2xl font-bold text-accent flex-shrink-0">
+                              ${item.price}
+                            </span>
+                          </div>
+                          <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-3">
+                            {item.description}
+                          </p>
+                          {/* Share Buttons */}
+                          <ShareButtons 
+                            title={item.name}
+                            description={item.description || ''}
+                            hashtags={['HighSpirits', 'IndianCuisine', 'FineFood', 'MusTry']}
+                            showLabel={true}
+                            size="sm"
+                          />
                         </div>
-                        <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  ))
+                )}
               </TabsContent>
             ))}
 

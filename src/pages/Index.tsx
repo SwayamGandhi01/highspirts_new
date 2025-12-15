@@ -10,6 +10,7 @@ import AmbienceTour from '@/components/AmbienceTour';
 import ChefPhilosophy from '@/components/ChefPhilosophy';
 import MenuStory from '@/components/MenuStory';
 import Carousel3D from '@/components/Carousel3D';
+import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Award, Clock, Users, Star } from 'lucide-react';
@@ -296,64 +297,10 @@ const Index = () => {
         <AmbienceTour />
       </div>
 
-      {/* Testimonials Preview */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <p className="text-accent font-inter tracking-widest mb-3 uppercase text-sm">
-              Guest Reviews
-            </p>
-            <h2 className="text-4xl md:text-5xl font-playfair font-bold text-luxury mb-4">
-              What Our Guests Say
-            </h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: 'Emma Thompson',
-                review: 'Absolutely exquisite! The butter chicken was perfection, and the ambience transported us to luxury.',
-                rating: 5,
-              },
-              {
-                name: 'James Wilson',
-                review: 'Best Indian restaurant in Australia. The attention to detail in every dish is remarkable.',
-                rating: 5,
-              },
-              {
-                name: 'Sophia Martinez',
-                review: 'A true fine dining experience. From the moment we walked in, we felt like royalty.',
-                rating: 5,
-              },
-            ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="glass-effect rounded-lg p-8 hover:scale-105 transition-transform duration-300"
-              >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-accent text-accent" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground italic mb-6 leading-relaxed">
-                  "{testimonial.review}"
-                </p>
-                <p className="text-accent font-semibold">{testimonial.name}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Testimonials Carousel */}
+      <div id="testimonials">
+        <TestimonialsCarousel />
+      </div>
 
       <NewsletterSection />
       <Footer />

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromoBanner Design Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+        }
+        .preview-section {
+            background: white;
+            padding: 40px;
+            margin: 30px auto;
+            max-width: 1200px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .banner-demo {
+            position: relative;
+            background: linear-gradient(90deg, rgba(220, 171, 51, 0.9), rgb(220, 171, 51), rgba(220, 171, 51, 0.8));
+            padding: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .banner-demo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .banner-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .banner-text {
+            flex: 1;
+        }
+        .banner-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1e1b4b;
+            margin-bottom: 4px;
+        }
+        .banner-description {
+            font-size: 14px;
+            color: rgba(30, 27, 75, 0.9);
+            margin-bottom: 4px;
+        }
+        .banner-timer {
+            font-size: 12px;
+            color: rgba(30, 27, 75, 0.7);
+        }
+        .banner-cta {
+            padding: 8px 24px;
+            background: #1e1b4b;
+            color: #dcab33;
+            font-weight: 600;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        .banner-cta:hover {
+            background: #16132f;
+            transform: scale(1.05);
+        }
+        .banner-close {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: none;
+            color: #1e1b4b;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+        .banner-close:hover {
+            background: rgba(30, 27, 75, 0.1);
+            transform: scale(1.1);
+        }
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+        .mobile-cta {
+            display: none;
+            width: 100%;
+            padding: 10px 16px;
+            background: #1e1b4b;
+            color: #dcab33;
+            font-weight: 600;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        @media (max-width: 640px) {
+            .banner-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .banner-cta {
+                display: none;
+            }
+            .mobile-cta {
+                display: block;
+            }
+            .banner-message {
+                font-size: 16px;
+            }
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .feature-card {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #dcab33;
+        }
+        .feature-card h4 {
+            color: #1e1b4b;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+        .feature-card p {
+            color: #666;
+            font-size: 13px;
+            margin: 0;
+        }
+        h1 {
+            color: #1e1b4b;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-section">
+        <h1>🎉 PromoBanner Design Preview</h1>
+        <p class="subtitle">Special Offers/Promotions Banner Component</p>
+        
+        <h2 style="color: #1e1b4b; font-size: 16px; margin-bottom: 15px;">Desktop View (1200px+)</h2>
+        <div class="banner-demo">
+            <div class="pulse-dot"></div>
+            <div class="banner-content">
+                <div class="banner-text">
+                    <div class="banner-message">✨ Happy Hour 5-7PM</div>
+                    <div class="banner-description">20% off all drinks</div>
+                    <div class="banner-timer">2h 15m left</div>
+                </div>
+                <button class="banner-cta">Enjoy Now</button>
+                <button class="banner-close">✕</button>
+            </div>
+        </div>
+
+        <h2 style="color: #1e1b4b; font-size: 16px; margin-bottom: 15px; margin-top: 35px;">Tablet View (640px - 1200px)</h2>
+        <div class="banner-demo" style="max-width: 800px;">
+            <div class="pulse-dot"></div>
+            <div class="banner-content">
+                <div class="banner-text" style="font-size: 14px;">
+                    <div class="banner-message" style="font-size: 15px;">✨ Happy Hour 5-7PM</div>
+                    <div class="banner-description">20% off all drinks</div>
+                    <div class="banner-timer">2h 15m left</div>
+                </div>
+                <button class="banner-cta" style="padding: 6px 16px; font-size: 13px;">Enjoy Now</button>
+                <button class="banner-close">✕</button>
+            </div>
+        </div>
+
+        <h2 style="color: #1e1b4b; font-size: 16px; margin-bottom: 15px; margin-top: 35px;">Mobile View (< 640px)</h2>
+        <div class="banner-demo" style="max-width: 400px;">
+            <div class="pulse-dot"></div>
+            <div class="banner-content">
+                <div class="banner-text" style="font-size: 13px;">
+                    <div class="banner-message" style="font-size: 14px;">✨ Happy Hour 5-7PM</div>
+                    <div class="banner-description">20% off all drinks</div>
+                    <div class="banner-timer">2h 15m left</div>
+                </div>
+                <button class="banner-close">✕</button>
+                <button class="mobile-cta" style="display: block;">Enjoy Now</button>
+            </div>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>⏰ Time-Based Display</h4>
+                <p>Only shows during 5-7 PM. Automatically hides outside promo hours.</p>
+            </div>
+            <div class="feature-card">
+                <h4>⏱️ Countdown Timer</h4>
+                <p>Displays "Xh Ym left" and updates every 30 seconds.</p>
+            </div>
+            <div class="feature-card">
+                <h4>❌ Dismissible</h4>
+                <p>Close button persists dismissal in localStorage. Resets daily at 6 AM.</p>
+            </div>
+            <div class="feature-card">
+                <h4>✨ Animations</h4>
+                <p>Slide-down entrance, shimmer effect, pulsing dot, smooth transitions.</p>
+            </div>
+            <div class="feature-card">
+                <h4>📱 Responsive</h4>
+                <p>Adapts layout: horizontal desktop, stacked mobile with full-width button.</p>
+            </div>
+            <div class="feature-card">
+                <h4>🎨 Theme Colors</h4>
+                <p>Gold accent background with dark slate text. Matches website theme.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 20px; background: #f0f7ff; border-left: 4px solid #3b82f6; border-radius: 6px;">
+            <h3 style="color: #1e1b4b; margin: 0 0 10px 0;">📍 Positioning</h3>
+            <p style="color: #666; margin: 0; font-size: 13px;">
+                <strong>Location:</strong> Fixed below navbar<br>
+                <strong>Z-Index:</strong> 40 (below navbar's 50, above content)<br>
+                <strong>Trigger:</strong> Only during promo hours (5 PM - 7 PM)<br>
+                <strong>Storage:</strong> localStorage for dismissal persistence
+            </p>
+        </div>
+
+        <div style="margin-top: 20px; padding: 20px; background: #fef3c7; border-left: 4px solid #fbbf24; border-radius: 6px;">
+            <h3 style="color: #1e1b4b; margin: 0 0 10px 0;">⚙️ Customization</h3>
+            <p style="color: #666; margin: 0; font-size: 13px;">
+                <strong>Edit the promoConfig object in PromoBanner.tsx:</strong><br>
+                • message: Custom promotion message<br>
+                • description: Details about the offer<br>
+                • startTime: Hour to start (0-23)<br>
+                • endTime: Hour to end<br>
+                • ctaText: Button text<br>
+                • ctaLink: Where button links to
+            </p>
+        </div>
+    </div>
+</body>
+</html>

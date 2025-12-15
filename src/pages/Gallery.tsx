@@ -1,7 +1,9 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { GalleryImageSkeleton } from '@/components/skeletons/GalleryImageSkeleton';
+import ShareButtons from '@/components/ShareButtons';
 
 import image1 from '@/assets/1.png';
 import image2 from '@/assets/2.png';
@@ -18,6 +20,7 @@ import Image4 from '@/assets/Image4.jpg';
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
 
   const galleryImages = [
     // Dine Gallery
@@ -45,6 +48,15 @@ const Gallery = () => {
   const filteredImages = activeFilter === 'all' 
     ? galleryImages 
     : galleryImages.filter(img => img.category === activeFilter);
+
+  // Simulate image loading - in real app, this would be based on actual image load events
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [activeFilter]);
 
   return (
     <div className="min-h-screen">
@@ -87,14 +99,26 @@ const Gallery = () => {
       </section>
 
       {/* Image Grid Gallery Section */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center gap-6 mb-12 flex-wrap">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-background">
+        <div className="container mx-auto px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8">
+          <div className="flex justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16 flex-wrap">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveFilter('all')}
+              className={`px-3 xs:px-4 sm:px-6 md:px-8 py-1.5 xs:py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 ${
+                activeFilter === 'all'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'border-2 border-accent text-accent hover:bg-accent/10'
+              }`}
+            >
+              ALL
+            </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveFilter('dine')}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-3 xs:px-4 sm:px-6 md:px-8 py-1.5 xs:py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 ${
                 activeFilter === 'dine'
                   ? 'bg-accent text-accent-foreground'
                   : 'border-2 border-accent text-accent hover:bg-accent/10'
@@ -106,7 +130,7 @@ const Gallery = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveFilter('venue')}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-3 xs:px-4 sm:px-6 md:px-8 py-1.5 xs:py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 ${
                 activeFilter === 'venue'
                   ? 'bg-accent text-accent-foreground'
                   : 'border-2 border-accent text-accent hover:bg-accent/10'
@@ -118,7 +142,7 @@ const Gallery = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setActiveFilter('food')}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
+              className={`px-3 xs:px-4 sm:px-6 md:px-8 py-1.5 xs:py-2 sm:py-3 rounded-lg text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 ${
                 activeFilter === 'food'
                   ? 'bg-accent text-accent-foreground'
                   : 'border-2 border-accent text-accent hover:bg-accent/10'
@@ -131,36 +155,41 @@ const Gallery = () => {
           {/* Gallery Grid */}
           <motion.div 
             layout
-            className="grid grid-cols-3 gap-4 md:gap-6"
+            className="grid grid-cols-3 gap-2 xs:gap-2.5 sm:gap-3 md:gap-4 lg:gap-5 xl:gap-6"
           >
-            {filteredImages.map((image, index) => (
-              <motion.div
-                key={`${image.alt}-${index}`}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setSelectedImage(image.src)}
-                className="group relative overflow-hidden rounded-lg aspect-square cursor-pointer"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                {/* Overlay on hover */}
+            {isLoading ? (
+              <GalleryImageSkeleton count={filteredImages.length} />
+            ) : (
+              filteredImages.map((image, index) => (
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center"
+                  key={`${image.alt}-${index}`}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => setSelectedImage(image.src)}
+                  className="group relative overflow-hidden rounded-lg xs:rounded-lg sm:rounded-xl aspect-square cursor-pointer shadow-sm xs:shadow-md md:shadow-lg hover:shadow-xl transition-shadow duration-300"
                 >
-                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                  {/* Overlay on hover */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center"
+                  >
+                    <svg className="w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10 xl:w-12 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              ))
+            )}
           </motion.div>
         </div>
       </section>
@@ -178,25 +207,35 @@ const Gallery = () => {
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0.8 }}
-            className="relative max-w-4xl w-full"
+            className="relative max-w-4xl w-full space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <img src={selectedImage} alt="Gallery" className="w-full h-auto rounded-lg" />
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 bg-accent text-accent-foreground rounded-full p-2 hover:bg-accent/90 transition-colors"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            
+            {/* Share Buttons */}
+            <div className="bg-background/95 backdrop-blur-sm rounded-lg xs:rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 md:p-5 flex flex-col xs:flex-col sm:flex-row items-start xs:items-center sm:items-center justify-between gap-2 xs:gap-3 sm:gap-4">
+              <ShareButtons 
+                title="High Spirits Gallery" 
+                description="Check out this beautiful moment from our restaurant"
+                showLabel={false}
+                size="sm"
+              />
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="bg-accent text-accent-foreground rounded-full p-1.5 xs:p-2 sm:p-2.5 hover:bg-accent/90 transition-colors flex-shrink-0"
+              >
+                <svg className="w-4 xs:w-5 sm:w-5 md:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </motion.div>
         </motion.div>
       )}
 
       {/* Reservation CTA */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
-        <div className="container mx-auto px-4">
+      <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background to-secondary/20">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -204,12 +243,12 @@ const Gallery = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <p className="text-muted-foreground mb-6 text-lg">
+            <p className="text-muted-foreground mb-3 xs:mb-4 sm:mb-5 md:mb-6 text-sm xs:text-base sm:text-lg">
               Experience it yourself
             </p>
 
             <button
-              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 py-4 rounded-md gold-glow transition-all duration-300"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-4 xs:px-5 sm:px-6 md:px-8 py-2.5 xs:py-3 sm:py-3 md:py-4 rounded-md gold-glow transition-all duration-300 text-xs xs:text-sm sm:text-base"
               onClick={() => window.location.href = '/reservations'}
             >
               Make a Reservation
