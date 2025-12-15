@@ -19,7 +19,7 @@ const ContactWidget = () => {
       icon: Phone,
       label: 'Call Us',
       bgColor: 'bg-blue-500',
-      href: 'tel:+61412345678',
+      href: 'tel:+61-0451382958',
       tooltip: 'Give us a call',
     },
     {

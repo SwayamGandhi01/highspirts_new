@@ -8,12 +8,6 @@ import image2 from '@/assets/2.png';
 import image3 from '@/assets/3.png';
 import image4 from '@/assets/4.png';
 import image5 from '@/assets/5.png';
-import heroDish1 from '@/assets/hero-dish-1.jpg';
-import heroDish2 from '@/assets/hero-dish-2.jpg';
-import heroDish3 from '@/assets/hero-dish-3.jpg';
-import dalMakhani from '@/assets/dish-dal-makhani.jpg';
-import palakPaneer from '@/assets/dish-palak-paneer.jpg';
-import roganJosh from '@/assets/dish-rogan-josh.jpg';
 import cocktail from '@/assets/cocktail-signature.jpg';
 import winePairing from '@/assets/wine-pairing.jpg';
 import restaurantAmbience from '@/assets/restaurant-ambience.jpg';
@@ -35,12 +29,9 @@ const Gallery = () => {
     { src: image4, alt: 'Restaurant 4', category: 'dine' },
     
     // Food Gallery
-    { src: heroDish1, alt: 'Signature Dish', category: 'food' },
-    { src: dalMakhani, alt: 'Dal Makhani', category: 'food' },
-    { src: heroDish2, alt: 'Tandoori Grill', category: 'food' },
-    { src: palakPaneer, alt: 'Palak Paneer', category: 'food' },
-    { src: heroDish3, alt: 'Biryani', category: 'food' },
-    { src: roganJosh, alt: 'Rogan Josh', category: 'food' },
+    { src: '/7.jpg', alt: 'Signature Dish', category: 'food' },
+    { src: '/8.jpg', alt: 'Dal Makhani', category: 'food' },
+    { src: '/9.jpg', alt: 'Tandoori Grill', category: 'food' },
     
     // Venue Gallery
     { src: image3, alt: 'Restaurant 3', category: 'venue' },

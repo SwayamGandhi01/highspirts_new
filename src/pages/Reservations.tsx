@@ -143,7 +143,7 @@ const Reservations = () => {
       <Navbar />
       
       {/* Hero Section with Banner Carousel */}
-      <section className="relative w-full mt-20 overflow-hidden" style={{height: '850px'}}>
+      <section className="relative w-full mt-20 overflow-hidden h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh]">
         {/* Current Banner - Base Layer */}
         <div
           className="absolute inset-0 transition-opacity duration-1500 ease-in-out"
@@ -173,15 +173,15 @@ const Reservations = () => {
       </section>
 
       {/* Reservation Form */}
-      <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-4">
           {/* Text Section Above Form */}
-          <div className="text-center mb-12 max-w-3xl mx-auto">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-accent font-inter tracking-widest mb-4 uppercase text-sm"
+              className="text-accent font-inter tracking-widest mb-4 uppercase text-xs sm:text-sm"
             >
               Reserve Your Table
             </motion.p>
@@ -189,7 +189,7 @@ const Reservations = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-playfair font-bold text-luxury mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-playfair font-bold text-luxury mb-6"
             >
               Book a Table
             </motion.h1>
@@ -197,7 +197,7 @@ const Reservations = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-xl text-foreground max-w-2xl mx-auto"
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-foreground max-w-2xl mx-auto"
             >
               Secure your spot for an unforgettable dining experience
             </motion.p>
@@ -209,7 +209,7 @@ const Reservations = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="glass-effect rounded-lg p-8 md:p-12"
+              className="glass-effect rounded-lg p-6 sm:p-8 md:p-12"
             >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
