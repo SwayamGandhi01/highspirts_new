@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import DishGrid from '@/components/DishGrid';
 import Footer from '@/components/Footer';
+import NewsletterSection from '@/components/NewsletterSection';
 import SignatureExperiences from '@/components/SignatureExperiences';
 import TimelineSection from '@/components/TimelineSection';
 import IngredientsShowcase from '@/components/IngredientsShowcase';
@@ -74,7 +75,9 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
+      <div id="home">
+        <Hero />
+      </div>
 
       {/* Scrolling Banner Section */}
 <section className="bg-gradient-to-r from-primary via-primary/90 to-primary overflow-hidden w-full">
@@ -126,13 +129,17 @@ const Index = () => {
       </div>
     </section>
 
-      <DishGrid />
+      <div id="signature-dishes">
+        <DishGrid />
+      </div>
       
       {/* Signature Experiences */}
-      <SignatureExperiences />
+      <div id="experiences">
+        <SignatureExperiences />
+      </div>
       
       {/* 3D Carousel Section */}
-      <section className="py-32 bg-gradient-to-b from-background to-secondary/20">
+      <section id="chef-philosophy" className="py-32 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -275,13 +282,19 @@ const Index = () => {
       </section>
       
       {/* Timeline Section */}
-      <TimelineSection />
+      <div id="timeline">
+        <TimelineSection />
+      </div>
       
       {/* Ingredients Showcase */}
-      <IngredientsShowcase />
+      <div id="ingredients">
+        <IngredientsShowcase />
+      </div>
       
       {/* Ambience Tour */}
-      <AmbienceTour />
+      <div id="ambience-tour">
+        <AmbienceTour />
+      </div>
 
       {/* Testimonials Preview */}
       <section className="py-24 bg-gradient-to-b from-background to-secondary/20">
@@ -342,6 +355,7 @@ const Index = () => {
         </div>
       </section>
 
+      <NewsletterSection />
       <Footer />
     </div>
   );

@@ -1,34 +1,42 @@
 import { motion } from 'framer-motion';
-import dalMakhani from '@/assets/dish-dal-makhani.jpg';
-import palakPaneer from '@/assets/dish-palak-paneer.jpg';
-import roganJosh from '@/assets/dish-rogan-josh.jpg';
-import naan from '@/assets/dish-naan.jpg';
 
 const IngredientsShowcase = () => {
   const ingredients = [
     {
-      name: "Black Lentils",
-      origin: "Punjab, India",
-      image: dalMakhani,
-      description: "Hand-selected premium whole urad dal, slow-cooked for 12 hours to achieve velvety perfection"
+      name: "Signature Butter Chicken",
+      origin: "Chef's Special",
+      image: "/signature buuter chicken.jpg",
+      description: "Succulent chicken in a velvety tomato and butter sauce, perfected over two decades with a touch of cream and aromatic spices"
     },
     {
-      name: "Australian Lamb",
-      origin: "Tasmania, Australia",
-      image: roganJosh,
-      description: "Grass-fed, ethically sourced from pristine Tasmanian highlands, aged for optimal tenderness"
+      name: "Tandoori Mixed Grill",
+      origin: "Signature Selection",
+      image: "/tandoori mixed grill.jpg",
+      description: "Premium selection of tandoor-roasted meats, marinated in aromatic spices and Australian native herbs, served sizzling"
     },
     {
-      name: "Organic Spinach",
-      origin: "Victoria, Australia",
-      image: palakPaneer,
-      description: "Farm-fresh baby spinach from our local Victorian partners, harvested at peak freshness"
+      name: "Biryani Royale",
+      origin: "Royal Heritage",
+      image: "/biryani royale.jpg",
+      description: "Fragrant basmati rice layered with tender lamb, saffron, and 23 secret spices—a royal feast for the discerning palate"
     },
     {
-      name: "Stone-Ground Flour",
-      origin: "Punjab, India",
-      image: naan,
-      description: "Traditional chakki-ground whole wheat, imported directly from heritage mills in Punjab"
+      name: "Dal Makhani",
+      origin: "Punjab Tradition",
+      image: "/truffle dal makhani.jpg",
+      description: "18-hour slow-cooked black lentils finished with cream and Australian black truffle, a luxurious rendition of a classic"
+    },
+    {
+      name: "Palak Paneer",
+      origin: "Farm Fresh",
+      image: "/plaak paneer  supreme.jpg",
+      description: "Silky spinach sauce with house-made paneer, enhanced with organic Victorian produce and aromatic spices"
+    },
+    {
+      name: "Tasmanian Lamb Rogan Josh",
+      origin: "Tasmania Excellence",
+      image: "/rasmanian lamb.jpg",
+      description: "Premium Tasmanian lamb in aromatic Kashmiri gravy—where Australian excellence meets authentic Indian culinary tradition"
     }
   ];
 
