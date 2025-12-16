@@ -6,9 +6,10 @@ interface TiltImageProps {
   onClick?: () => void;
   className?: string;
   children?: React.ReactNode;
+  lazy?: boolean;
 }
 
-export const TiltImage = ({ src, alt, onClick, className, children }: TiltImageProps) => {
+export const TiltImage = ({ src, alt, onClick, className, children, lazy = true }: TiltImageProps) => {
   const { tilt, elementRef, handleMouseMove, handleMouseLeave } = useTiltEffect();
 
   return (
@@ -26,6 +27,8 @@ export const TiltImage = ({ src, alt, onClick, className, children }: TiltImageP
       <img
         src={src}
         alt={alt}
+        loading={lazy ? "lazy" : "eager"}
+        decoding="async"
         style={{
           transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           transition: 'transform 0.1s ease-out',

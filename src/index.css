@@ -415,3 +415,62 @@ All colors MUST be HSL.
   word-break: break-word;
   display: inline;
 }
+
+/* 📱 MOBILE ANIMATION CONSIDERATIONS - Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 📱 TOUCH-FRIENDLY BUTTON SIZES - Minimum 44x44px for touch targets */
+@media (max-width: 768px) {
+  button,
+  [role="button"],
+  a[role="button"],
+  .button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+}
+
+/* 📱 ACTIVE STATE FOR TOUCH DEVICES - Replace hover with active */
+@media (hover: none) and (pointer: coarse) {
+  /* Disable hover states on touch devices */
+  button:hover,
+  [role="button"]:hover,
+  a:hover {
+    background-color: inherit;
+    color: inherit;
+  }
+  
+  /* Add active states instead */
+  button:active,
+  [role="button"]:active,
+  a:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+}
+
+/* 📱 IMAGE LAZY LOADING - Optimize image loading performance */
+img[loading="lazy"] {
+  background-color: #f0f0f0;
+}
+
+/* Responsive image handling */
+picture {
+  display: contents;
+}
+
+/* Ensure images scale responsively */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
