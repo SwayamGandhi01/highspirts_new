@@ -190,17 +190,32 @@ const Reservations = () => {
       </section>
 
       {/* Mobile Hero Section - Alternative design for mobile */}
-      <section className="relative w-full sm:hidden bg-gradient-to-br from-secondary to-secondary/80 overflow-hidden">
-        <div className="relative w-full h-72 flex flex-col items-center justify-center px-4 py-12">
-          {/* Decorative top accent line */}
-          <div className="mb-6 h-0.5 w-16 bg-gradient-to-r from-accent/0 via-accent to-accent/0"></div>
+      <section className="relative w-full sm:hidden bg-gradient-to-b from-background via-background to-secondary/10 overflow-hidden">
+        <div className="relative w-full min-h-80 flex flex-col items-center justify-center px-4 py-16">
+          {/* Background gradient orbs */}
+          <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+          
+          {/* Decorative top accent line with glow */}
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="mb-8 h-0.5 w-20 bg-gradient-to-r from-accent/0 via-accent to-accent/0 shadow-lg shadow-accent/50"
+          ></motion.div>
           
           {/* Main heading */}
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl font-playfair font-bold text-luxury text-center mb-3"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl font-playfair font-bold text-center mb-4"
+            style={{
+              background: 'linear-gradient(135deg, hsl(42 78% 51%) 0%, hsl(42 78% 55%) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text'
+            }}
           >
             Your Table Awaits
           </motion.h2>
@@ -209,21 +224,33 @@ const Reservations = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-sm text-foreground/80 text-center max-w-xs mb-8"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-sm text-foreground/70 text-center max-w-sm mb-10 leading-relaxed"
           >
-            Reserve your spot for an unforgettable dining experience
+            Reserve your spot for an unforgettable dining experience crafted with passion
           </motion.p>
           
-          {/* Decorative accent elements */}
-          <div className="flex gap-3 items-center justify-center mb-6">
-            <div className="h-0.5 w-8 bg-accent/50"></div>
-            <div className="w-2 h-2 rounded-full bg-accent"></div>
-            <div className="h-0.5 w-8 bg-accent/50"></div>
-          </div>
+          {/* Decorative ornament */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex gap-4 items-center justify-center mb-8"
+          >
+            <div className="h-px w-10 bg-gradient-to-r from-transparent to-accent/50"></div>
+            <div className="w-2 h-2 rounded-full bg-accent shadow-md shadow-accent/50"></div>
+            <div className="h-px w-10 bg-gradient-to-l from-transparent to-accent/50"></div>
+          </motion.div>
           
-          {/* Bottom overlay gradient */}
-          <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-secondary via-secondary/50 to-transparent pointer-events-none"></div>
+          {/* Luxury tagline */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="text-xs tracking-widest text-accent/80 uppercase"
+          >
+            ✨ Fine Dining Experience
+          </motion.p>
         </div>
       </section>
 

@@ -111,7 +111,7 @@ const Index = () => {
                   text-luxury leading-[1.05]
                 "
               >
-               “Rise in Flavour, Rise in Spirit — ਚਾਰਦੀ ਕਲਾ in Every Visit.”
+              Taste da vibe, vibe da taste, High Spirits shining, Chardi Kala with grace.
               </span>
  
               {/* STAR ICON */}
