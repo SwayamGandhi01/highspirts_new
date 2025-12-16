@@ -1,10 +1,11 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { GalleryImageSkeleton } from '@/components/skeletons/GalleryImageSkeleton';
 import ShareButtons from '@/components/ShareButtons';
 import { TiltImage } from '@/components/TiltImage';
+import { Share2, X } from 'lucide-react';
 
 import image1 from '@/assets/1.png';
 import image2 from '@/assets/2.png';
@@ -202,16 +203,31 @@ const Gallery = () => {
                     onClick={() => setSelectedImage(image.src)}
                     className="w-full h-full"
                   >
-                    {/* Overlay on hover */}
+                    {/* Overlay on hover with play button and share */}
                     <motion.div
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
-                      className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center"
+                      className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center gap-3 xs:gap-4"
                     >
+                      {/* Play button */}
                       <svg className="w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10 xl:w-12 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M8 5v14l11-7z" />
                       </svg>
                     </motion.div>
+                    
+                    {/* Share button on hover - bottom right corner */}
+                    <motion.button
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileHover={{ opacity: 1, scale: 1 }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedImage(image.src);
+                      }}
+                      className="absolute bottom-2 xs:bottom-3 sm:bottom-4 right-2 xs:right-3 sm:right-4 bg-accent/90 hover:bg-accent text-accent-foreground rounded-full p-1.5 xs:p-2 sm:p-2.5 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 z-10 pointer-events-auto"
+                      title="View & Share"
+                    >
+                      <Share2 className="w-4 xs:w-5 sm:w-5 md:w-6" />
+                    </motion.button>
                   </TiltImage>
                 </motion.div>
               ))
@@ -220,44 +236,86 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setSelectedImage(null)}
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-        >
+      {/* Lightbox Modal - Fully Responsive */}
+      <AnimatePresence>
+        {selectedImage && (
           <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.8 }}
-            className="relative max-w-4xl w-full space-y-4"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-2 xs:p-3 sm:p-4 md:p-6 overflow-y-auto"
           >
-            <img src={selectedImage} alt="Gallery" className="w-full h-auto rounded-lg" />
-            
-            {/* Share Buttons */}
-            <div className="bg-background/95 backdrop-blur-sm rounded-lg xs:rounded-lg sm:rounded-xl p-2 xs:p-3 sm:p-4 md:p-5 flex flex-col xs:flex-col sm:flex-row items-start xs:items-center sm:items-center justify-between gap-2 xs:gap-3 sm:gap-4">
-              <ShareButtons 
-                title="High Spirits Gallery" 
-                description="Check out this beautiful moment from our restaurant"
-                showLabel={false}
-                size="sm"
-              />
-              <button
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full max-w-5xl bg-background/95 backdrop-blur-sm rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button - Top Right */}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setSelectedImage(null)}
-                className="bg-accent text-accent-foreground rounded-full p-1.5 xs:p-2 sm:p-2.5 hover:bg-accent/90 transition-colors flex-shrink-0"
+                className="absolute top-2 xs:top-3 sm:top-4 right-2 xs:right-3 sm:right-4 bg-accent hover:bg-accent/90 text-accent-foreground rounded-full p-1.5 xs:p-2 sm:p-2.5 z-10 transition-all duration-300"
+                title="Close"
               >
-                <svg className="w-4 xs:w-5 sm:w-5 md:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+                <X className="w-5 xs:w-6 sm:w-6 md:w-7" />
+              </motion.button>
+
+              {/* Image Container */}
+              <div className="relative w-full">
+                <motion.img 
+                  src={selectedImage} 
+                  alt="Gallery Full View" 
+                  className="w-full h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[80vh] object-contain"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                />
+              </div>
+
+              {/* Share Section - Responsive Layout */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.1 }}
+                className="bg-background/98 backdrop-blur-md border-t border-accent/20 p-3 xs:p-4 sm:p-5 md:p-6 space-y-3 xs:space-y-3 sm:space-y-4"
+              >
+                {/* Share Label */}
+                <div className="flex items-center gap-2">
+                  <Share2 className="w-4 xs:w-5 sm:w-5 text-accent" />
+                  <span className="text-xs xs:text-sm sm:text-base font-semibold text-accent">
+                    Share this moment
+                  </span>
+                </div>
+
+                {/* Share Buttons */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.2 }}
+                  className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4"
+                >
+                  <ShareButtons 
+                    title="High Spirits Gallery" 
+                    description="Check out this beautiful moment from our restaurant"
+                    showLabel={false}
+                    size="md"
+                  />
+                </motion.div>
+
+                {/* Image Info */}
+                <div className="text-xs xs:text-sm sm:text-base text-muted-foreground pt-2 xs:pt-3 sm:pt-4 border-t border-accent/10">
+                  Click outside or press the X button to close
+                </div>
+              </motion.div>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Reservation CTA */}
       <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-gradient-to-b from-background to-secondary/20">

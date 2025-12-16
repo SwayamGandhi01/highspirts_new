@@ -16,20 +16,21 @@ export const TiltImage = ({ src, alt, onClick, className, children }: TiltImageP
       ref={elementRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
       className={className}
       style={{
         perspective: '1000px',
-        cursor: 'move',
+        cursor: 'pointer',
       }}
     >
       <img
         src={src}
         alt={alt}
-        onClick={onClick}
         style={{
           transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
           transition: 'transform 0.1s ease-out',
           transformStyle: 'preserve-3d',
+          pointerEvents: 'none',
         }}
         className="w-full h-full object-cover gallery-image"
       />
