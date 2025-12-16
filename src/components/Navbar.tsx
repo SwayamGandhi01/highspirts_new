@@ -89,9 +89,9 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-primary/95 backdrop-blur-md shadow-lg shadow-accent/20'
+          ? 'backdrop-blur-lg bg-black/40 shadow-lg shadow-accent/20'
           : 'bg-transparent'
       }`}
     >
@@ -134,11 +134,7 @@ const Navbar = () => {
                     }`}
                   >
                     {link.name}
-                    <span
-                      className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${
-                        activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'
-                      }`}
-                    />
+                    <span className="absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 w-0 group-hover:w-full" />
                   </button>
                 ) : (
                   <Link
@@ -146,7 +142,7 @@ const Navbar = () => {
                     className="text-foreground hover:text-accent transition-colors duration-300 font-inter text-xs md:text-sm font-medium tracking-wide relative group whitespace-nowrap"
                   >
                     {link.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent group-hover:w-full transition-all duration-300" />
+                    <span className="absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 w-0 group-hover:w-full" />
                   </Link>
                 )}
               </motion.div>

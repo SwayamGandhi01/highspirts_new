@@ -80,6 +80,9 @@ const DishGrid = () => {
                   onClick={() => setCurrentIndex(index)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  style={{
+                    animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
+                  }}
                   className={`flex-shrink-0 rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
                     currentIndex === index
                       ? 'border-accent ring-2 ring-accent/50'

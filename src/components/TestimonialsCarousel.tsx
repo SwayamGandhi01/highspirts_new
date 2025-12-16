@@ -15,6 +15,7 @@ const TestimonialsCarousel = () => {
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [displayCount, setDisplayCount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [displayedTexts, setDisplayedTexts] = useState<{ [key: number]: string }>({});
 
   const testimonials: Testimonial[] = [
     {
@@ -85,6 +86,34 @@ const TestimonialsCarousel = () => {
 
     return () => clearInterval(timer);
   }, [isAutoPlay, testimonials.length]);
+
+  // Typewriter effect for all testimonial quotes
+  useEffect(() => {
+    // Initialize typewriter for all testimonials on mount
+    testimonials.forEach((testimonial, index) => {
+      if (!displayedTexts[index]) {
+        let charIndex = 0;
+        const text = testimonial.review;
+        // Slower, more visible typing: ~4-5 seconds per full quote
+        // Average testimonial is ~140 characters, so 30-35ms per character
+        const charDelay = 32; // Visible, smooth character-by-character typing
+
+        const typeInterval = setInterval(() => {
+          if (charIndex <= text.length) {
+            setDisplayedTexts((prev) => ({
+              ...prev,
+              [index]: text.slice(0, charIndex),
+            }));
+            charIndex++;
+          } else {
+            clearInterval(typeInterval);
+          }
+        }, charDelay);
+
+        return () => clearInterval(typeInterval);
+      }
+    });
+  }, [testimonials, displayedTexts]);
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
@@ -157,6 +186,7 @@ const TestimonialsCarousel = () => {
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <motion.div
                           key={i}
+                          className="star"
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ delay: 0.3 + i * 0.1 }}
@@ -166,14 +196,20 @@ const TestimonialsCarousel = () => {
                       ))}
                     </motion.div>
 
-                    {/* Review Text */}
+                    {/* Review Text - Typewriter Effect */}
                     <p className="text-sm sm:text-base text-muted-foreground italic mb-6 flex-grow leading-relaxed">
-                      "{testimonial.review}"
+                      "
+                      <span className="typewriter-text">
+                        {displayedTexts[(currentIndex + index) % testimonials.length] !== undefined
+                          ? displayedTexts[(currentIndex + index) % testimonials.length]
+                          : testimonial.review}
+                      </span>
+                      "
                     </p>
 
                     {/* Customer Info */}
                     <div className="flex items-center gap-3 pt-4 border-t border-accent/20">
-                      <div className="text-2xl sm:text-3xl">{testimonial.avatar}</div>
+                      <div className="text-2xl sm:text-3xl testimonial-avatar">{testimonial.avatar}</div>
                       <div>
                         <p className="text-accent font-semibold text-sm sm:text-base">
                           {testimonial.name}

@@ -1,9 +1,10 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GalleryImageSkeleton } from '@/components/skeletons/GalleryImageSkeleton';
 import ShareButtons from '@/components/ShareButtons';
+import { TiltImage } from '@/components/TiltImage';
 
 import image1 from '@/assets/1.png';
 import image2 from '@/assets/2.png';
@@ -21,6 +22,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
+  const imageRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const galleryImages = [
     // Dine Gallery
@@ -57,6 +59,27 @@ const Gallery = () => {
     }, 800);
     return () => clearTimeout(timer);
   }, [activeFilter]);
+
+  // Intersection Observer for image zoom animation
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('zoom-in-animation');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    imageRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [filteredImages]);
 
   return (
     <div className="min-h-screen">
@@ -163,30 +186,33 @@ const Gallery = () => {
               filteredImages.map((image, index) => (
                 <motion.div
                   key={`${image.alt}-${index}`}
+                  ref={(el) => {
+                    if (el) imageRefs.current[index] = el;
+                  }}
                   layout
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
-                  onClick={() => setSelectedImage(image.src)}
                   className="group relative overflow-hidden rounded-lg xs:rounded-lg sm:rounded-xl aspect-square cursor-pointer shadow-sm xs:shadow-md md:shadow-lg hover:shadow-xl transition-shadow duration-300"
                 >
-                  <img
+                  <TiltImage
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  {/* Overlay on hover */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center"
+                    onClick={() => setSelectedImage(image.src)}
+                    className="w-full h-full"
                   >
-                    <svg className="w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10 xl:w-12 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </motion.div>
+                    {/* Overlay on hover */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                      className="absolute inset-0 bg-gradient-to-t from-accent/60 via-transparent to-transparent flex items-center justify-center"
+                    >
+                      <svg className="w-6 xs:w-7 sm:w-8 md:w-9 lg:w-10 xl:w-12 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </motion.div>
+                  </TiltImage>
                 </motion.div>
               ))
             )}

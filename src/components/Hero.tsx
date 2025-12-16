@@ -74,7 +74,7 @@ const Hero = () => {
           </motion.p> */}
 
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-playfair font-bold mb-6">
-            <span className="text-luxury block">HIGH SPIRITS</span>
+            <span className="text-luxury block hero-title">HIGH SPIRITS</span>
           </h1>
 
           <motion.p
@@ -121,7 +121,7 @@ const Hero = () => {
           <Link to="/reservations">
             <Button
               size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-lg px-8 py-6 gold-glow"
+              className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-lg px-8 py-6 gold-glow cta-button"
             >
               Book a Table
             </Button>
@@ -130,7 +130,7 @@ const Hero = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-semibold text-lg px-8 py-6"
+              className="border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground font-semibold text-lg px-8 py-6 cta-button"
             >
               Explore Menu
             </Button>
