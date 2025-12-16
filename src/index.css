@@ -474,3 +474,27 @@ img {
   height: auto;
   display: block;
 }
+/* 🎯 RESERVATIONS BANNER RESPONSIVE - Accurate image fitting */
+@media (max-width: 639px) {
+  /* Mobile: contain to show full image without cutting */
+  section > div > div {
+    background-size: contain !important;
+    background-position: center !important;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  /* Tablet: contain for proper fitting */
+  section > div > div {
+    background-size: contain !important;
+    background-position: center !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: cover for immersive effect */
+  section > div > div {
+    background-size: cover !important;
+    background-position: center !important;
+  }
+}

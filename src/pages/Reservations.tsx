@@ -152,50 +152,91 @@ const Reservations = () => {
     <div className="min-h-screen">
       <Navbar />
       
-      {/* Hero Section with Banner Carousel */}
-      <section className="relative w-full mt-20 overflow-hidden h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh]">
-        {!isBannerLoaded && <BannerSkeleton />}
-        
-        {/* Current Banner - Base Layer */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${isBannerLoaded ? 'block' : 'hidden'}`}
-          style={{
-            backgroundImage: `url(${banners[currentBanner]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            opacity: isTransitioning ? 0 : 1,
-          }}
-          onLoad={() => setIsBannerLoaded(true)}
-        />
-        
-        {/* Next Banner - Overlay Layer */}
-        <div
-          className="absolute inset-0 transition-opacity duration-1500 ease-in-out"
-          style={{
-            backgroundImage: `url(${banners[nextBanner]})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            opacity: isTransitioning ? 1 : 0,
-          }}
-          onLoad={() => setIsBannerLoaded(true)}
-        />
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
+      {/* Hero Section with Banner Carousel - Hidden on mobile, visible on tablet+ */}
+      <section className="relative w-full mt-20 overflow-hidden bg-black hidden sm:block">
+        {/* Responsive height: tablet 55vh, medium 65vh, desktop 70vh */}
+        <div className="relative w-full h-[55vh] md:h-[65vh] lg:h-[70vh]">
+          {!isBannerLoaded && <BannerSkeleton />}
+          
+          {/* Current Banner - Base Layer */}
+          <div
+            className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${isBannerLoaded ? 'block' : 'hidden'}`}
+            style={{
+              backgroundImage: `url(${banners[currentBanner]})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              opacity: isTransitioning ? 0 : 1,
+            }}
+            onLoad={() => setIsBannerLoaded(true)}
+          />
+          
+          {/* Next Banner - Overlay Layer */}
+          <div
+            className="absolute inset-0 transition-opacity duration-1500 ease-in-out"
+            style={{
+              backgroundImage: `url(${banners[nextBanner]})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              opacity: isTransitioning ? 1 : 0,
+            }}
+            onLoad={() => setIsBannerLoaded(true)}
+          />
+          
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/30 pointer-events-none"></div>
+        </div>
+      </section>
+
+      {/* Mobile Hero Section - Alternative design for mobile */}
+      <section className="relative w-full sm:hidden bg-gradient-to-br from-secondary to-secondary/80 overflow-hidden">
+        <div className="relative w-full h-72 flex flex-col items-center justify-center px-4 py-12">
+          {/* Decorative top accent line */}
+          <div className="mb-6 h-0.5 w-16 bg-gradient-to-r from-accent/0 via-accent to-accent/0"></div>
+          
+          {/* Main heading */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl font-playfair font-bold text-luxury text-center mb-3"
+          >
+            Your Table Awaits
+          </motion.h2>
+          
+          {/* Subheading */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-sm text-foreground/80 text-center max-w-xs mb-8"
+          >
+            Reserve your spot for an unforgettable dining experience
+          </motion.p>
+          
+          {/* Decorative accent elements */}
+          <div className="flex gap-3 items-center justify-center mb-6">
+            <div className="h-0.5 w-8 bg-accent/50"></div>
+            <div className="w-2 h-2 rounded-full bg-accent"></div>
+            <div className="h-0.5 w-8 bg-accent/50"></div>
+          </div>
+          
+          {/* Bottom overlay gradient */}
+          <div className="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-secondary via-secondary/50 to-transparent pointer-events-none"></div>
+        </div>
       </section>
 
       {/* Reservation Form */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background to-secondary/20">
+      <section className="py-16 sm:py-20 md:py-28 lg:py-32 bg-gradient-to-b from-background to-secondary/20">
         <div className="container mx-auto px-4">
           {/* Text Section Above Form */}
-          <div className="text-center mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto">
+          <div className="text-center mb-12 sm:mb-16 md:mb-20 max-w-3xl mx-auto">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-accent font-inter tracking-widest mb-4 uppercase text-xs sm:text-sm"
+              className="text-accent font-inter tracking-widest mb-6 uppercase text-xs sm:text-sm"
             >
               Reserve Your Table
             </motion.p>
@@ -203,7 +244,7 @@ const Reservations = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-playfair font-bold text-luxury mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-playfair font-bold text-luxury mb-8"
             >
               Book a Table
             </motion.h1>
@@ -223,11 +264,11 @@ const Reservations = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="glass-effect rounded-lg p-6 sm:p-8 md:p-12"
+              className="glass-effect rounded-lg p-8 sm:p-10 md:p-14 lg:p-16"
             >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
                     <Label htmlFor="firstName" className="text-foreground">First Name</Label>
                     <Input
                       id="firstName"
@@ -237,7 +278,7 @@ const Reservations = () => {
                       className="bg-secondary/50 border-accent/20 focus:border-accent"
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Label htmlFor="lastName" className="text-foreground">Last Name</Label>
                     <Input
                       id="lastName"
@@ -249,8 +290,8 @@ const Reservations = () => {
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-3">
                     <Label htmlFor="email" className="text-foreground">Email</Label>
                     <Input
                       id="email"
@@ -261,7 +302,7 @@ const Reservations = () => {
                       className="bg-secondary/50 border-accent/20 focus:border-accent"
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Label htmlFor="phone" className="text-foreground">Phone</Label>
                     <Input
                       id="phone"
@@ -274,8 +315,8 @@ const Reservations = () => {
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-3 gap-6">
-                  <div className="space-y-2">
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div className="space-y-3">
                     <Label className="text-foreground flex items-center gap-2">
                       <CalendarIcon className="w-4 h-4 text-accent" />
                       Date
@@ -304,7 +345,7 @@ const Reservations = () => {
                     </Popover>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Label className="text-foreground flex items-center gap-2">
                       <Clock className="w-4 h-4 text-accent" />
                       Time
@@ -327,7 +368,7 @@ const Reservations = () => {
                     </Select>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Label className="text-foreground flex items-center gap-2">
                       <Users className="w-4 h-4 text-accent" />
                       Guests
@@ -347,7 +388,7 @@ const Reservations = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3 pt-4">
                   <Label className="text-foreground">Occasion (Optional)</Label>
                   <Select value={formData.occasion} onValueChange={handleOccasionChange}>
                     <SelectTrigger className="bg-secondary/50 border-accent/20">
@@ -361,7 +402,7 @@ const Reservations = () => {
                   </Select>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3 pt-2">
                   <Label htmlFor="specialRequests" className="text-foreground">
                     Special Requests (Optional)
                   </Label>
@@ -370,7 +411,7 @@ const Reservations = () => {
                     value={formData.specialRequests}
                     onChange={handleChange}
                     placeholder="Dietary restrictions, special occasions, seating preferences..."
-                    className="bg-secondary/50 border-accent/20 focus:border-accent min-h-[100px]"
+                    className="bg-secondary/50 border-accent/20 focus:border-accent min-h-[120px]"
                   />
                 </div>
 
