@@ -111,7 +111,7 @@ const Index = () => {
                   text-luxury leading-[1.05]
                 "
               >
-              Taste da vibe, vibe da taste, High Spirits shining, Chardi Kala with grace.
+              Taste da vibe, vibe da taste, High Spirits shining, ਚਾਰਦੀ ਕਲਾ with grace.
               </span>
  
               {/* STAR ICON */}
