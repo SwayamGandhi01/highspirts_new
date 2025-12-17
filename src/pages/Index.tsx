@@ -13,7 +13,7 @@ import Carousel3D from '@/components/Carousel3D';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Award, Clock, Users, Star } from 'lucide-react';
+import { Award, Clock, Users, Star, ChefHat, Calendar, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import chefPortrait from '@/assets/chef-portrait.jpg';
@@ -80,55 +80,76 @@ const Index = () => {
         <Hero />
       </div>
 
-      {/* Scrolling Banner Section */}
-<section className="bg-gradient-to-r from-primary via-primary/90 to-primary overflow-hidden w-full">
-      <div
-        className="
-          relative w-full flex items-center
-          h-[120px] sm:h-[140px] md:h-[180px] lg:h-[200px]
-          overflow-hidden
-        "
-      >
-        <motion.div
-          className="flex gap-20 items-center whitespace-nowrap"
-          animate={{ x: [0, -2000] }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {Array.from({ length: 6 }).map((_, index) => (
-            <div
-              key={index}
-              className="flex gap-6 items-center flex-shrink-0 min-w-max"
+      {/* Bilingual Typing & Fade Section - REMOVED */}
+
+      {/* Highlights & Stats Section */}
+      <section className="bg-primary py-16 sm:py-20 md:py-24 lg:py-28">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {/* 100% Authentic */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="border-2 border-accent/40 rounded-3xl p-8 sm:p-10 text-center hover:border-accent/70 transition-all duration-300 hover:bg-accent/5 backdrop-blur-sm"
             >
-              {/* MAIN TEXT */}
-              <span
-                className="
-                  inline-block font-playfair font-bold
-                  text-4xl sm:text-5xl md:text-6xl lg:text-7xl
-                  text-luxury leading-[1.05]
-                "
-              >
-              Taste da vibe, vibe da taste, High Spirits shining, ਚਾਰਦੀ ਕਲਾ with grace.
-              </span>
- 
-              {/* STAR ICON */}
-              <span
-                className="
-                  inline-block
-                  text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-                  text-accent/70 leading-[1]
-                "
-              >
-                
-              </span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+              <div className="mb-6 flex justify-center">
+                <ChefHat className="w-12 h-12 sm:w-14 sm:h-14 text-accent" strokeWidth={1.5} />
+              </div>
+              <h3 className="font-playfair font-bold text-4xl sm:text-5xl text-accent mb-3">100%</h3>
+              <p className="text-sm sm:text-base text-foreground/75 font-medium">Authentic Punjabi Recipes</p>
+            </motion.div>
+
+            {/* 7 Days Fresh */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="border-2 border-accent/40 rounded-3xl p-8 sm:p-10 text-center hover:border-accent/70 transition-all duration-300 hover:bg-accent/5 backdrop-blur-sm"
+            >
+              <div className="mb-6 flex justify-center">
+                <Calendar className="w-12 h-12 sm:w-14 sm:h-14 text-accent" strokeWidth={1.5} />
+              </div>
+              <h3 className="font-playfair font-bold text-4xl sm:text-5xl text-accent mb-3">7 Days</h3>
+              <p className="text-sm sm:text-base text-foreground/75 font-medium">Freshly Served</p>
+            </motion.div>
+
+            {/* Zero Compromise */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="border-2 border-accent/40 rounded-3xl p-8 sm:p-10 text-center hover:border-accent/70 transition-all duration-300 hover:bg-accent/5 backdrop-blur-sm"
+            >
+              <div className="mb-6 flex justify-center">
+                <Shield className="w-12 h-12 sm:w-14 sm:h-14 text-accent" strokeWidth={1.5} />
+              </div>
+              <h3 className="font-playfair font-bold text-4xl sm:text-5xl text-accent mb-3">Zero</h3>
+              <p className="text-sm sm:text-base text-foreground/75 font-medium">Compromise</p>
+            </motion.div>
+
+            {/* 5.0 Rating */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="border-2 border-accent/40 rounded-3xl p-8 sm:p-10 text-center hover:border-accent/70 transition-all duration-300 hover:bg-accent/5 backdrop-blur-sm"
+            >
+              <div className="mb-6 flex justify-center">
+                <Star className="w-12 h-12 sm:w-14 sm:h-14 text-accent fill-accent" strokeWidth={1.5} />
+              </div>
+              <h3 className="font-playfair font-bold text-4xl sm:text-5xl text-accent mb-3">5.0</h3>
+              <p className="text-sm sm:text-base text-foreground/75 font-medium">Google Rating</p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Scrolling Banner Section - REMOVED */}
 
       <div id="signature-dishes">
         <DishGrid />

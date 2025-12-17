@@ -275,19 +275,9 @@ All colors MUST be HSL.
   animation: zoomIn 0.8s ease-out forwards;
 }
 
-/* 🎨 IMAGE FILTER TRANSITION - Grayscale to Color */
-@keyframes filterFade {
-  0% {
-    filter: grayscale(100%) brightness(0.7);
-  }
-  100% {
-    filter: grayscale(0%) brightness(1);
-  }
-}
-
+/* 🎨 IMAGE FILTER TRANSITION - Removed grayscale effect, showing original colors */
 .gallery-image {
-  animation: filterFade 6s ease-out forwards;
-  animation-delay: 0.3s;
+  /* Original vibrant colors preserved */
 }
 
 /* ⭐ STAR PULSE ANIMATION - Testimonials */

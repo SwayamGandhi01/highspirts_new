@@ -80,7 +80,7 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      details: ['0451382958', 'Mon-Sun: 9AM - 11PM'],
+      details: ['0451382958', 'Mon-Sun: 5:00PM - 9:00PM'],
     },
     {
       icon: Mail,
@@ -91,9 +91,9 @@ const Contact = () => {
       icon: Clock,
       title: 'Opening Hours',
       details: [
-        'Mon-Thu: 5:30PM - 11PM',
-        'Fri-Sat: 5:30PM - 12AM',
-        'Sunday: 5:30PM - 10:30PM',
+        'Mon-Thu: 5:00PM - 9:00PM',
+        'Fri-Sat: 5:00PM - 9:00PM',
+        'Sunday: 5:00PM - 9:00PM',
       ],
     },
   ];

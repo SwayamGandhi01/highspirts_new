@@ -123,7 +123,7 @@ const Hero = () => {
               size="lg"
               className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-lg px-8 py-6 gold-glow cta-button"
             >
-              Book a Table
+              Walk In
             </Button>
           </Link>
           <Link to="/menu">
@@ -135,6 +135,56 @@ const Hero = () => {
               Explore Menu
             </Button>
           </Link>
+        </motion.div>
+
+        {/* Scrolling Taglines Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4 }}
+          className="mt-20 overflow-hidden w-screen relative -left-1/2 left-[calc(50%-50vw)] bg-gradient-to-r from-primary/80 via-primary to-primary/80 py-6"
+        >
+          <div className="relative">
+            <motion.div
+              className="flex gap-6 items-center whitespace-nowrap px-4"
+              animate={{ x: [0, -2400] }}
+              transition={{
+                duration: 35,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="flex gap-6 items-center flex-shrink-0 min-w-max">
+                  <div className="border-2 border-accent/50 bg-primary/40 backdrop-blur-sm rounded-full px-6 py-3 hover:bg-primary/60 hover:border-accent transition-all duration-300">
+                    <p className="text-sm md:text-base font-semibold text-accent whitespace-nowrap">
+                      ⭐Buffet Starts at 5:30 P.M.⭐
+                    </p>
+                  </div>
+                  <div className="border-2 border-accent/50 bg-primary/40 backdrop-blur-sm rounded-full px-6 py-3 hover:bg-primary/60 hover:border-accent transition-all duration-300">
+                    <p className="text-sm md:text-base font-semibold text-accent whitespace-nowrap">
+                      ⭐Join Us for a High-Spirited Evening⭐
+                    </p>
+                  </div>
+                  <div className="border-2 border-accent/50 bg-primary/40 backdrop-blur-sm rounded-full px-6 py-3 hover:bg-primary/60 hover:border-accent transition-all duration-300">
+                    <p className="text-sm md:text-base font-semibold text-accent whitespace-nowrap">
+                      ⭐Punjabi Roots. Premium Plates.⭐
+                    </p>
+                  </div>
+                  <div className="border-2 border-accent/50 bg-primary/40 backdrop-blur-sm rounded-full px-6 py-3 hover:bg-primary/60 hover:border-accent transition-all duration-300">
+                    <p className="text-sm md:text-base font-semibold text-accent whitespace-nowrap">
+                      ⭐High on Taste. High on Spirit.⭐
+                    </p>
+                  </div>
+                  <div className="border-2 border-accent/50 bg-primary/40 backdrop-blur-sm rounded-full px-6 py-3 hover:bg-primary/60 hover:border-accent transition-all duration-300">
+                    <p className="text-sm md:text-base font-semibold text-accent whitespace-nowrap">
+                      ⭐Food that Carries Chadti Kala⭐
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
       </div>
 

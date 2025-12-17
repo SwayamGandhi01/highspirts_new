@@ -152,7 +152,7 @@ const Navbar = () => {
                 variant="default"
                 className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-4 md:px-5 text-xs md:text-sm gold-glow whitespace-nowrap"
               >
-                Book a Table
+                Walk In
               </Button>
             </Link>
           </div>
@@ -216,7 +216,7 @@ const Navbar = () => {
               >
                 <Link to="/reservations" onClick={() => setIsMobileMenuOpen(false)}>
                   <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold text-xs sm:text-sm">
-                    Book a Table
+                    Walk In
                   </Button>
                 </Link>
               </motion.div>
